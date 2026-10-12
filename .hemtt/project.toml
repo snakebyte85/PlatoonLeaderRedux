@@ -30,9 +30,11 @@ parameters = [
     "-noPause",
 ]
 
-# Launched with `hemtt launch ace`
-[hemtt.launch.ace]
+# Launched with `hemtt launch cup`
+[hemtt.launch.cup]
 extends = "default"
 workshop = [
-    "463939057", # ACE3's Workshop ID
+    "497660133", #CUP WEAPONS
+    "497661914", #CUP UNITS
+    "541888371", #CUP VEHICLES
 ]

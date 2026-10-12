@@ -42,7 +42,7 @@ Original url: "Plmod\pl_vehicle_fnc.sqf"
             hint "There is no crew in the selected vehicle";
        } else {
     
-            if( _groupLen > _targetVic emptyPositions "Cargo" ) then {
+            if( _groupLen > _targetVic emptyPositions "" ) then {
                 hint "Not enough avaiable seats!";
             } else {
 
@@ -111,17 +111,37 @@ Original url: "Plmod\pl_vehicle_fnc.sqf"
                     _group setVariable ["setSpecial", true];
                     _group setVariable ["specialIcon", pl_cargo_icon];
                     pl_groups_getting_in set [netid _group, _targetVic];
+
+                    
+                    _filterPositions = {
+                        _role = toLower (_x select 1);
+                        _empty = isNull(_x select 5);
+                        (_role != "driver" && _role != "commander" && _empty)
+                    };
+                    
+                    _sortPositions = {
+                        private _return = switch(toLower(_x select 1)) do {
+                            case "gunner": { 0 };
+                            case "turret": { 1 };
+                            case "cargo": { 2 };
+                            default { 3 };
+                        };                          
+                        _return
+                    };
+                    _emptyPositions = [ fullCrew[_targetVic, "", true], [], _sortPositions, "ASCEND", _filterPositions] call BIS_fnc_sortBy;
+                    
                     {
                         if !(_x in (crew _targetVic)) then {
-                            _x assignAsCargo _targetVic;
-                            [_x] allowGetIn true;
-                            [_x] orderGetIn true;
-                        }
-                        else
-                        {
-                            [_x] allowGetIn true;
-                            [_x] orderGetIn true;
-                        }; 
+                            switch(toLower((_emptyPositions select 0) select 1)) do {
+                                case "gunner": {_x assignAsGunner _targetVic};
+                                case "turret": {_x assignAsTurret [_targetVic, ((_emptyPositions select 0) select 3)]};
+                                case "cargo": {_x assignAsCargo _targetVic};
+                            };
+                            _emptyPositions deleteAt 0;
+                        };
+                            
+                        [_x] allowGetIn true;
+                        [_x] orderGetIn true;
                     } forEach (units _group);
                     _group setVariable ["onTask", true];
                     waitUntil {sleep 0.1; ({_x in _targetVic} count (units _group) > 0) or !(_group getVariable ["onTask", true])};

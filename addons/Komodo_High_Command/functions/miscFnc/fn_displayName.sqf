@@ -23,10 +23,11 @@ if (count (units _group) > 1 ) then {
         _primaryVehicle = _groupVehicles select 0;
     
         _displayName = switch (true) do {
-            case (_primaryVehicle isKindOf "Tank"): { "Armor units"; };
-            case (_primaryVehicle isKindOf "Wheeled_APC_F"): { "Mechanized units"; };
-            case (_primaryVehicle isKindOf "Car"): { "Motorized units"; };
-            case (_primaryVehicle isKindOf "Air"): { "Air units"; };
+            case (_primaryVehicle isKindOf "Tank"): { "Armor units" };
+            case (_primaryVehicle isKindOf "Wheeled_APC_F"): { "Mechanized units" };
+            case (_primaryVehicle isKindOf "Car"): { "Motorized units" };
+            case (_primaryVehicle isKindOf "Air"): { "Air units" };
+            default {"units"};
         };
     };
 };

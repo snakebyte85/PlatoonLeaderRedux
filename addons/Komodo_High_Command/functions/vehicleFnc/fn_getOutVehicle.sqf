@@ -161,7 +161,7 @@ Original url: "Plmod\pl_vehicle_fnc.sqf"
             };
              _markerName setMarkerColor ([side _vic] call KMD_fnc_sideToMarkerColor);
             // Setup the cargo of Transport Vehicle
-            _cargo = fullCrew [_vic, "cargo", false];
+            _cargo = fullCrew [_vic, "", false];
             _cargoGroups = [];
             {
                 _groupCargo = group (_x select 0);
@@ -263,10 +263,8 @@ Original url: "Plmod\pl_vehicle_fnc.sqf"
                         if !(_moveInConvoy) then {
                             {
                                 {
-                                    if ((assignedVehicleRole _x) select 0 isEqualTo "Cargo") then {
-                                        unassignVehicle _x;
-                                        doGetOut _x;
-                                    };
+                                    unassignVehicle _x;
+                                    doGetOut _x;
                                 } forEach (units _x);
                                 if (_x == (group player)) then {
                                     doStop driver (vehicle (player));
@@ -303,13 +301,8 @@ Original url: "Plmod\pl_vehicle_fnc.sqf"
                     {
                         waitUntil {sleep 0.1; ((leader _group) distance2D waypointPosition[(group _commander), currentWaypoint (group _commander)] < 30) or (!alive _vic)};
                         {
-                            _unit = _x select 0;
-                            _unit enableAI "AUTOCOMBAT";
-                            if (_x select 1 isEqualTo "cargo") then {
-                                unassignVehicle _unit;
-                                doGetOut _unit;
-                            };
-                        } forEach _cargo;
+                            _x leaveVehicle _vic; 
+                        } forEach _cargoGroups;
                     };
                     if !(_moveInConvoy) then {
                         {

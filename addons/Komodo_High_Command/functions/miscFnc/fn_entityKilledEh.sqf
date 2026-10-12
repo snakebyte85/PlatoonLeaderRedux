@@ -41,7 +41,7 @@ addMissionEventHandler ["EntityKilled",{
     }
     else
     {
-        if ( group _killer in hcAllGroups player ) then {
+        if ( group _killer in hcAllGroups player && side (group _killed) != civilian && [side _killer, side (group _killed)] call BIS_fnc_sideIsEnemy ) then {
         
             format ["NICE! We killed one of theirs! %1", _killed] call KMD_fnc_debug;
             
