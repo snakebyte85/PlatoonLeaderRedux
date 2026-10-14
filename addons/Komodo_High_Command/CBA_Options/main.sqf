@@ -65,9 +65,31 @@ private _category = 'Platoon Leader Redux Redux MAJOR.MINOR.PATCH';
 [
     "pl_enable_3d_icons",
     "CHECKBOX",
-    ["Enable 3D Icons","Enable Extra 3D Icons when selecting or hovering over a group"],
+    ["Enable Extra 3D Info Icons","Enable Extra 3D Icons when selecting or hovering over a group"],
     _category,
     true
+] call CBA_fnc_addSetting;
+
+[
+    "pl_hide_player_hq_marker",
+    "CHECKBOX",
+    ["Hide the player commander HQ marker","Normally when High Command is enabled, a HQ marker is shown over the player commander on the map. You can uncheck this to hide the marker if you don't want to know your location."],
+    _category,
+    false,
+    0,
+    {call KMD_fnc_hidePlayerHqMarkerChanged;}
+] call CBA_fnc_addSetting;
+
+[
+    "pl_hide_enemy_3d_icons",
+    "CHECKBOX",
+    ["Hide the enemy 3d icon","Hide the enemy 3d icon, so the player can't use this as a cheat to see the leader enemy group location."],
+    _category,
+    false,
+    0,
+    {   
+        [!pl_hide_enemy_3d_icons] call KMD_fnc_hideEnemyMarker;
+    }
 ] call CBA_fnc_addSetting;
 
 [

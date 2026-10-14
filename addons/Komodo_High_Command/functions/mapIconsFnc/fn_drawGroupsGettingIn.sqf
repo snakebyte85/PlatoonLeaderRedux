@@ -1,8 +1,4 @@
-/*
-Original name: pl_draw_left_vehicles
-New name:      KMD_fnc_drawLeftVehicles
-Original url: "Plmod\pl_map_icons.sqf"
-*/
+
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw","
         _display = _this#0;
         if (hcShownBar) then {

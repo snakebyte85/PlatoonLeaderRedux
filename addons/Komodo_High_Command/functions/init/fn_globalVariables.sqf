@@ -59,7 +59,11 @@ if (pl_enable_vehicle_recovery) then {pl_show_vehicle_recovery = 1} else {pl_sho
 
 pl_mortars = [];
 
+// icon for showing that a vehicle is transporting cargo (infantry)
 pl_cargo_icon = "\A3\ui_f\data\igui\cfg\simpleTasks\types\truck_ca.paa";
+
+// backup of the normal player group icons, to restore if settings is enabled again
+pl_player_group_icons = [];
 
 pl_group_rename = nil;
 

@@ -5,5 +5,6 @@ Original url: "Plmod\pl_group_fnc.sqf"
 */
     params ["_group"];
     player hcRemoveGroup _group;
+
     //TODO: remove everything related to PL
     _group setVariable ["pl_show_info", false];

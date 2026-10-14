@@ -36,9 +36,6 @@ while {true} do {
                 _x enableAttack false;
                 _x setCombatMode "YELLOW";
             };
-        } else {
-            player hcRemoveGroup (group player);
-            call KMD_fnc_resetHCBar;
         };
 
     } forEach hcAllGroups player;

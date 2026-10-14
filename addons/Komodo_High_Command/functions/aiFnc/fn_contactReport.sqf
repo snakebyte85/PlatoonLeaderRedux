@@ -21,7 +21,7 @@ if (_leader != player) then {
     _index = _leader addEventHandler ["FiredNear", {
         params ["_unit", "_firer", "_distance", "_weapon", "_muzzle", "_mode", "_ammo", "_gunner"];
         
-        format ["Firing near %1, it was %2", _unit, _firer] call KMD_fnc_debug;
+        //format ["Firing near %1, it was %2", _unit, _firer] call KMD_fnc_debug;
 
 
         if ((group _firer) isEqualTo (group _unit)) then {
@@ -36,6 +36,10 @@ if (_leader != player) then {
                     };
                 } else {
                     _target_display_name = [configOf _target] call BIS_fnc_displayName;
+                };
+
+                if(_target_display_name == "") then {
+                    _target_display_name = "enemy";
                 };
                 
                 playSound "beep";
@@ -69,17 +73,18 @@ if (_leader != player) then {
         } forEach _targets;
         
         {            
-            if( !(_y getVariable["pl_spotted",false]) ) then {
+            if( !isNull(_y) && !(_y getVariable["pl_spotted",false]) ) then {
                 format ["%1 SPOTTED NEW ENEMY! %2", _group, _y] call KMD_fnc_debug;
                 _y setVariable["pl_spotted", true];
                 _target_display_name=[_y] call KMD_fnc_displayName;
                 playSound "beep";
                 _leader sideChat format["Spotted enemy %1", _target_display_name];
+                _knownTargets set [_x, _y];
             };
         } forEach _currentTargets;
         
         {
-            if( !_x in _currentTargets ) then {
+            if( !(_x in _currentTargets) ) then {
                 format ["Group %1 forgot old spotted target %2", _group, _y] call KMD_fnc_debug;
                 _y setVariable["pl_spotted", false];
                 _knownTargets deleteAt _x;

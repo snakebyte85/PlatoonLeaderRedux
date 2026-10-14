@@ -1418,48 +1418,6 @@ class RscHCGroupRootMenu
                 enable="1";
                 speechId=0;
             };
-            class PlContacts
-            {
-                shortcuts[]={5};
-                class Params
-                {
-                    expression = "[] call KMD_fnc_playerReport";
-                };
-                title = "<img color='#e5e500' image='\A3\ui_f\data\igui\cfg\simpleTasks\types\radio_ca.paa'/><t> Report own Contacts</t";
-                shortcutsAction = "CommandingMenu4";
-                show = "HCIsLeader";
-                enable = "1";
-                speechId = 0;
-                command = -5;
-            };
-            class PlSeperator12
-            {
-                title="";
-                shortcuts[]={};
-                submenu="";
-                command=-1;
-                class params
-                {
-                    expression="";
-                };
-                show="1";
-                enable="1";
-                speechId=0;
-            };
-            // class PlJoinGroup
-            // {
-            //     title="Join Group";
-            //     shortcuts[]={6};
-            //     submenu="";
-            //     command=-5;
-            //     class params
-            //     {
-            //         expression="[hcSelected player select 0] spawn pl_join_hc_group";
-            //     };
-            //     show="HCIsLeader";
-            //     enable="HCNotEmpty";
-            //     speechId=0;
-            // };
             class PlMergeGroups
             {
                 title="Merge Groups";
@@ -1784,7 +1742,7 @@ class RscMenuStatus: RscSubmenu
         class Pl_Status_CreateHCGroup
         {
             title="Create HC Group";
-            shortcuts[]={10};
+            shortcuts[]={};
             submenu="";
             command=-5;
             class params
@@ -1793,6 +1751,20 @@ class RscMenuStatus: RscSubmenu
             };
             show="1";
             enable="NotEmpty";
+            speechId=0;
+        };
+        class Pl_Status_AddHCGroup
+        {
+            title="Add other group to HC";
+            shortcuts[]={};
+            submenu="";
+            command=-5;
+            class params
+            {
+                expression="[] spawn KMD_fnc_addToHc";
+            };
+            show="1";
+            enable="1";
             speechId=0;
         };
     };

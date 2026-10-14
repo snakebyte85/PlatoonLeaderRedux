@@ -12,11 +12,6 @@ class CfgFunctions
 			class initMapDrawing  {};
 		};
 
-		class misc
-		{
-			file = "\Komodo_High_Command\functions\misc";
-		};
-
 		class rearmFnc
 		{
 			file = "\Komodo_High_Command\functions\rearmFnc";
@@ -41,6 +36,9 @@ class CfgFunctions
 			class drawGroupsGettingIn        {};
 			class markTargetsOnMap           {};
 			class drawKia                    {};
+			class hidePlayerHqMarkerChanged {};
+			class setupHcElements   {};
+			class hideEnemyMarker {};
 		};
 
 		class groupFnc
@@ -95,10 +93,8 @@ class CfgFunctions
 			class followOther         {};
 			class march               {};
 			class icons3D             {};
-			class disableHcElements   {};
 			class groupIconClickEh    {};
 			class entityKilledEh      {};
-			class vehicleGroupCheck   {};
             class sideToColor         {};
             class sideToMarkerColor   {};
             class vehicleToIcon       {};
@@ -119,7 +115,6 @@ class CfgFunctions
 			class contactInfoShare     {};
 			class contactReport        {};
 
-			class playerReport         {};
 			class autoCrouch           {};
 			class medicalSetup         {};
 			class onDamage             {};
