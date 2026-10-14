@@ -1,6 +1,5 @@
 #include "script_version.hpp"
-#include "BIS_AddonInfo.hpp"
 #include "config\cfgPatches.cpp"
 #include "config\preinit.cpp"
 #include "functions\cfgFunctions.cpp"
-#include "jellyConfig.cpp"
+#include "config\menuConfig.cpp"

@@ -19,13 +19,12 @@ isNil{
     call KMD_fnc_icons3D;
     call KMD_fnc_groupIconClickEh;
     call KMD_fnc_entityKilledEh;
-    call KMD_fnc_vehicleGroupCheck;
 };
 
 /*
 Since these functions are spawned in external threads there is no need to include them in the unscheduled bracket.
 */
-[] spawn KMD_fnc_disableHcElements;
+[] spawn KMD_fnc_setupHcElements;
 [] spawn KMD_fnc_aiSetupLoop;
 
 };
