@@ -18,6 +18,7 @@ workshop = [
     "450814997",  # CBA_A3's Workshop ID
     "623475643",  # 3den enhanced
     "1779063631", # Zeus enhanced
+    "3499977893", # Advanced Developer Tools
 ]
 
 mission = "testPLRR.VR" # Mission to launch directly into the editor with

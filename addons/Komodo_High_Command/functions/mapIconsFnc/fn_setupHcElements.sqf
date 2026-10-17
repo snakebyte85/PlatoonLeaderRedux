@@ -20,6 +20,44 @@ addMissionEventHandler ["Map", {
     };
 }];
 
+addMissionEventHandler ["TeamSwitch", {
+	params ["_previousUnit", "_newUnit"];
+
+    _index = synchronizedObjects _previousUnit findIf {typeOf _x == "HighCommand"};
+    if( _index >= 0 ) then {
+        "The old unit had a hc command, setting up for the new unit" call KMD_fnc_debug;
+        if (synchronizedObjects player findIf {typeOf _x == "HighCommand"} == -1) then {
+            _group = createGroup sideLogic; 
+            _HighCommand = _group createUnit ["HighCommand", [0, 0, 0], [], 0, "NONE"];
+            _HighCommandSubordinate = _group createUnit ["HighCommandSubordinate", [0, 0, 0], [], 0, "NONE"];
+            _HighCommand synchronizeObjectsAdd [_HighCommandSubordinate, _newUnit];
+        };
+    };
+
+    {        
+        _previousUnit hcRemoveGroup _x;
+        if(_x != group _newUnit) then {
+            _newUnit hcSetGroup [_x];
+        };
+    } forEach hcAllGroups _previousUnit;
+
+    _group = group _previousUnit;
+    _newUnit hcSetGroup [_group];
+    _previousUnit enableAI "TEAMSWITCH";
+    [_group] spawn KMD_fnc_reset;
+    [_group] spawn KMD_fnc_setupAi;
+    if(!isNull(_group)) then {
+         _group setVariable ["MARTA_customicon", nil];
+    };
+
+    (group _newUnit) setVariable ["pl_show_info", false];
+    if(pl_hide_player_hq_marker) then {
+        call KMD_fnc_hidePlayerHqMarkerChanged;
+    };
+
+    setGroupIconsVisible[true, false];
+}];
+
 // need to wait everything is initialized after adding a group to hc to setting up the ongroupicon event handler
 waituntil { 
     sleep 0.5;
